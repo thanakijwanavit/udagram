@@ -24,3 +24,4 @@ install:
   #- docker-compose -f ./udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
   - bash udacity-c3-deployment/docker/build.sh
   - bash udacity-c3-deployment/docker/push.sh
+  - bash kubeUpdate.sh
