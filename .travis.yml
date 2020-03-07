@@ -21,9 +21,9 @@ before_install:
   - aws configure set aws_access_key_id $AWS_USERNAME
   - aws configure set aws_secret_access_key $AWS_PASSWORD
   - aws configure set default.region us-east-1
-  - aws sts get-caller-identity
   - aws --version
   - aws eks --region us-east-1 update-kubeconfig --name udagram
+  - kubectl config view --minify
   - kubectl get svc
 
 
