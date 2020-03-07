@@ -14,9 +14,24 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  - unzip awscliv2.zip
+  - sudo ./aws/install
+  - aws configure set aws_access_key_id $AWS_USERNAME
+  - aws configure set aws_secret_access_key $AWS_PASSWORD
+  - aws configure set default.region us-east-1
+  - aws --version
+  - aws eks --region us-east-1 update-kubeconfig --name udagram
+  - aws sts get-caller-identity
+  - kubectl config view --minify
+  - kubectl get svc
+
 
 
 
 install:
-    #- echo hello world
-  - docker-compose -f ./udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
+  #- docker-compose -f ./udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
+  - bash udacity-c3-deployment/docker/build.sh
+  - bash udacity-c3-deployment/docker/push.sh
+  - bash kubeUpdate.sh

@@ -1,2 +1,2 @@
 source .profile
-docker-compose -f ./docker-compose-build.yaml build
+docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml build
