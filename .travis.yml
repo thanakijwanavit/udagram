@@ -23,6 +23,7 @@ before_install:
   - aws configure set default.region us-east-1
   - aws --version
   - aws eks --region us-east-1 update-kubeconfig --name udagram
+  - aws sts get-caller-identity
   - kubectl config view --minify
   - kubectl get svc
 
